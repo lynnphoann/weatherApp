@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/colorList.dart';
+import 'package:weather_app/homepage/mainpage.dart';
 import 'package:weather_app/model/weatherModel.dart';
 import 'package:weather_app/weatherApi.dart';
 
@@ -12,9 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: "Roboto",
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -41,44 +45,21 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
+        backgroundColor: backgroundClr,
+
+        // appBar: AppBar(
+        //   title: Text(widget.title),
+        // ),
         body: FutureBuilder(
           future: getApiData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  Center(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      child: Text(
-                        "${apiData!.cityName}",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                  const Divider(),
-                  Container(
-                    height: 100,
-                    child: GridView(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, mainAxisExtent: 50),
-                      children: [
-                        Text("Temp       ${apiData!.temp}"),
-                        Text("Feels like ${apiData!.feelLike}"),
-                        Text("wind speed ${apiData!.windspeed}"),
-                        Text("humidity   ${apiData!.humidity}"),
-                      ],
-                    ),
-                  )
-                ],
+                children: [MainPage()],
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else {
