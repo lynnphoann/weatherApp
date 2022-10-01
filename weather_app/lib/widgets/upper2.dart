@@ -64,8 +64,8 @@ Widget Upper2(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(33),
             ),
-            elevation: 15,
-            shadowColor: Color.fromARGB(255, 212, 237, 213),
+            elevation: 20,
+            shadowColor: Color.fromARGB(77, 126, 232, 130),
           ),
         )
       ],

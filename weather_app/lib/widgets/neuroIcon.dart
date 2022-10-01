@@ -12,11 +12,14 @@ Widget neuromorphismIcon({required IconData icons, required double? size}) {
       borderRadius: BorderRadius.circular(13),
       boxShadow: [
         BoxShadow(
-            blurRadius: 10.0, offset: -CustomOffset, color: Color(0xFFbdbbbb)),
-        BoxShadow(
-          blurRadius: 10.0,
+          blurRadius: 11.0,
           offset: CustomOffset,
-          color: Color(0Xfffffdfd),
+          color: Color(0xFFc9cccf),
+        ),
+        BoxShadow(
+          blurRadius: 11.0,
+          offset: -CustomOffset,
+          color: Color(0Xffffffff),
         )
       ],
     ),

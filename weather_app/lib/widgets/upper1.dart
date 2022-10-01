@@ -13,7 +13,7 @@ Widget upper1(BuildContext context) {
           "Weather",
           style: TextStyle(
             fontSize: 32,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
             color: Color.fromARGB(255, 29, 29, 29),
             fontFamily: 'OpenSans-SemiBold',
           ),
