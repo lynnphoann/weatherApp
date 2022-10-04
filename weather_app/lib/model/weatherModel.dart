@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Weather {
   String? cityName;
   double? temp;
@@ -19,4 +21,21 @@ class Weather {
     humidity = json["main"]["humidity"];
     windspeed = json["wind"]["speed"];
   }
+}
+
+class SevenDaysModel {
+  Color textColor;
+  String date;
+  String weatherIcon;
+  Color bgColor;
+  String temp;
+  String title;
+  SevenDaysModel({
+    this.textColor = Colors.black,
+    required this.date,
+    required this.weatherIcon,
+    required this.bgColor,
+    required this.temp,
+    required this.title,
+  });
 }

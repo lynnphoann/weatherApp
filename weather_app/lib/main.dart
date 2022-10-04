@@ -46,18 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: backgroundClr,
-
-        // appBar: AppBar(
-        //   title: Text(widget.title),
-        // ),
         body: FutureBuilder(
           future: getApiData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [MainPage()],
-              );
+              return MainPage();
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
