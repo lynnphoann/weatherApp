@@ -1,3 +1,4 @@
+import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/colorList.dart';
 import 'package:weather_app/homepage/mainpage.dart';
@@ -20,13 +21,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: "Roboto",
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -35,8 +36,45 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late bool _serviceEnabled;
+  late PermissionStatus _permissionGranted;
+  LocationData? _userLocation;
+
   WeatherApi client = WeatherApi();
   Weather? apiData;
+
+  Future<void> getUserLocation() async {
+    Location location = Location();
+    _serviceEnabled = await location.serviceEnabled();
+
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.denied) {
+        return;
+      }
+    }
+
+    final _locationData = await location.getLocation();
+    setState(() {
+      _userLocation = _locationData;
+
+      print(_userLocation!.latitude);
+      print(_userLocation!.longitude);
+    });
+  }
+
+  void initState() {
+    getUserLocation();
+    super.initState();
+  }
 
   Future<void> getApiData() async {
     apiData = await client.getCurrentWeather("japan");
