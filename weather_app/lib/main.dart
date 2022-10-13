@@ -43,6 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
   WeatherApi client = WeatherApi();
   Weather? apiData;
 
+  WeatherLocationApi locationApi = WeatherLocationApi();
+  WeatherName? locationData;
+
   Future<void> getUserLocation() async {
     Location location = Location();
     _serviceEnabled = await location.serviceEnabled();
@@ -71,9 +74,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  @override
   void initState() {
     getUserLocation();
+    // getLocationData();
+    getApiData();
     super.initState();
+  }
+
+  Future<void> getLocationData() async {
+    locationData = await locationApi.getLocationName();
   }
 
   Future<void> getApiData() async {
@@ -85,10 +95,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         backgroundColor: backgroundClr,
         body: FutureBuilder(
-          future: getApiData(),
+          future: getLocationData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return MainPage();
+              return const MainPage();
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),

@@ -1,5 +1,22 @@
 import 'package:flutter/material.dart';
 
+class WeatherName {
+  String? cityname;
+  List? lisy;
+  String? cityname2;
+  WeatherName({
+    this.cityname,
+    this.lisy,
+    this.cityname2,
+  });
+
+  WeatherName.fromJson(Map<String, dynamic> json) {
+    cityname = json["name"];
+    lisy = json["0"]["local_names"];
+    cityname2 = json[0]["country"];
+  }
+}
+
 class Weather {
   String? cityName;
   double? temp;
