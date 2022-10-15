@@ -11,8 +11,8 @@ class WeatherName {
   });
 
   WeatherName.fromJson(Map<String, dynamic> json) {
-    cityname = json["name"];
-    lisy = json["0"]["local_names"];
+    cityname = json[0]["name"];
+    lisy = json["local_names"];
     cityname2 = json[0]["country"];
   }
 }

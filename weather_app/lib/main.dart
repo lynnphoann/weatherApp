@@ -4,6 +4,10 @@ import 'package:weather_app/colorList.dart';
 import 'package:weather_app/homepage/mainpage.dart';
 import 'package:weather_app/model/weatherModel.dart';
 import 'package:weather_app/weatherApi.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
+
+import 'package:weather_app/widgets/googleMap.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,12 +40,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // location permission ****************
   late bool _serviceEnabled;
   late PermissionStatus _permissionGranted;
   LocationData? _userLocation;
 
+// Weather Api ****************
   WeatherApi client = WeatherApi();
   Weather? apiData;
+
+// location Api*******************
 
   WeatherLocationApi locationApi = WeatherLocationApi();
   WeatherName? locationData;
@@ -77,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     getUserLocation();
-    // getLocationData();
+    getLocationData();
     getApiData();
     super.initState();
   }
@@ -98,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           future: getLocationData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return const MainPage();
+              return MainPage();
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),

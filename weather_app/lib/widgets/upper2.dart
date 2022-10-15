@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/widgets/googleMap.dart';
 
 Widget Upper2(
     {required BuildContext context,
@@ -55,17 +56,21 @@ Widget Upper2(
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.45,
-          child: Card(
-            child: SizedBox(
-              height: 150,
-              width: 100,
+          child: SizedBox(
+            height: 150,
+            width: 100,
+            child: Card(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(33),
+              ),
+              elevation: 20,
+              shadowColor: Color.fromARGB(164, 126, 232, 130),
+              child: GoogleMapApi(
+                latt: 30.00,
+                lngg: 40.00,
+              ),
             ),
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(33),
-            ),
-            elevation: 20,
-            shadowColor: Color.fromARGB(77, 126, 232, 130),
           ),
         )
       ],

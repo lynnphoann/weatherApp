@@ -6,11 +6,13 @@ import 'model/weatherModel.dart';
 class WeatherLocationApi {
   Future<WeatherName>? getLocationName() async {
     var endpoint = Uri.parse(
-      "http://api.openweathermap.org/geo/1.0/reverse?lat=34.6759878&lon=135.1767039&limit=5&appid=b946f907b973ffaabe6332eaaf0df3b4",
+      // "http://api.openweathermap.org/geo/1.0/reverse?lat=34.6759878&lon=135.1767039&limit=5&appid=b946f907b973ffaabe6332eaaf0df3b4",
+      "http://api.openweathermap.org/geo/1.0/direct?q=JP&limit=1&appid=b946f907b973ffaabe6332eaaf0df3b4",
     );
     var response = await http.get(endpoint);
     var body = jsonDecode(response.body);
     print(WeatherName.fromJson(body).cityname);
+    print(WeatherName.fromJson(body).lisy);
     return WeatherName.fromJson(body);
   }
 }
