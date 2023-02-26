@@ -27,7 +27,7 @@ class _GoogleMapApiState extends State<GoogleMapApi> {
   // );
 
   CameraPosition _kGooglePlex(double one, double two) {
-    return CameraPosition(target: LatLng(one, two));
+    return CameraPosition(target: LatLng(one, two), zoom: 9);
   }
 
   // static final CameraPosition _kLake = CameraPosition(
@@ -37,9 +37,17 @@ class _GoogleMapApiState extends State<GoogleMapApi> {
   //     zoom: 19.151926040649414);
   @override
   Widget build(BuildContext context) {
+    List<Marker> _markers = <Marker>[];
+    _markers.add(Marker(
+        markerId: MarkerId('Here'),
+        position: LatLng(widget.latt, widget.lngg),
+        infoWindow: InfoWindow(title: "You are here!")));
     return ClipRRect(
       borderRadius: BorderRadius.circular(33),
       child: GoogleMap(
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
+        // markers: Set<Marker>.of(_markers),
         zoomControlsEnabled: false,
         mapType: MapType.normal,
         initialCameraPosition: _kGooglePlex(widget.latt, widget.lngg),

@@ -6,9 +6,17 @@ import 'package:weather_app/widgets/middle.dart';
 import 'package:weather_app/widgets/upper1.dart';
 import 'package:weather_app/widgets/upper2.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  double latt;
+  double long;
+  MainPage({Key? key, required this.latt, required this.long})
+      : super(key: key);
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,9 +28,9 @@ class MainPage extends StatelessWidget {
               upper1(context),
               Upper2(
                 context: context,
-                cityName: "London",
-                latitude: -188.0,
-                longitude: 212.5,
+                cityName: "Japan",
+                latitude: widget.latt,
+                longitude: widget.long,
               ),
               Middle(),
               Lower1(),

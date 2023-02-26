@@ -67,8 +67,8 @@ Widget Upper2(
               elevation: 20,
               shadowColor: Color.fromARGB(164, 126, 232, 130),
               child: GoogleMapApi(
-                latt: 30.00,
-                lngg: 40.00,
+                latt: latitude,
+                lngg: longitude,
               ),
             ),
           ),

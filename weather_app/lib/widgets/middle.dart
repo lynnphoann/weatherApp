@@ -54,7 +54,7 @@ class Middle extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
-                    "27°",
+                    "28°",
                     style: TextStyle(
                       fontSize: 55,
                       color: Colors.white,
